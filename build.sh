@@ -20,8 +20,15 @@ fi
 # Create build directory
 mkdir -p build
 
-# Set classpath
-CLASSPATH=".:$ANTLR_JAR:build"
+# Set classpath - this must include the ANTLR JAR file
+# Fix: Use proper path separator for classpath
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]]; then
+    # Windows path separator
+    CLASSPATH=".;$ANTLR_JAR;build"
+else
+    # Unix-like path separator
+    CLASSPATH=".:$ANTLR_JAR:build"
+fi
 
 # Generate lexer from grammar
 echo "Generating lexer from grammar..."
