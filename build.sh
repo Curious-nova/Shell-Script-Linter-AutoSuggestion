@@ -25,7 +25,7 @@ CLASSPATH=".:$ANTLR_JAR:build"
 
 # Generate lexer from grammar
 echo "Generating lexer from grammar..."
-java -cp "$ANTLR_JAR" org.antlr.v4.Tool -o build ShellLexer.g4
+java -cp "$ANTLR_JAR" org.antlr.v4.Tool -o build antlr/ShellLexer.g4
 
 # Check if lexer generation was successful
 if [ $? -ne 0 ]; then
@@ -35,7 +35,7 @@ fi
 
 # Generate parser from grammar
 echo "Generating parser from grammar..."
-java -cp "$ANTLR_JAR" org.antlr.v4.Tool -o build -lib build ShellParser.g4
+java -cp "$ANTLR_JAR" org.antlr.v4.Tool -o build -lib build antlr/ShellParser.g4
 
 # Check if parser generation was successful
 if [ $? -ne 0 ]; then
@@ -45,7 +45,7 @@ fi
 
 # Compile Java files
 echo "Compiling Java files..."
-javac -cp "$CLASSPATH" -d build ShellErrorListener.java SuggestionEngine.java ShellLinter.java build/*.java
+javac -cp "$CLASSPATH" -d build javaFiles/ShellErrorListener.java javaFiles/SuggestionEngine.java javaFiles/ShellLinter.java build/*.java
 
 # Check if compilation was successful
 if [ $? -ne 0 ]; then
